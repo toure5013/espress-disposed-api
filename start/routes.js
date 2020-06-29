@@ -30,12 +30,29 @@ Route.group(() => {
   Route.post('user', 'UserController.store');
   Route.get('user/:id', "UserController.show").middleware('auth');
   Route.put('user/:id', 'UserController.update').middleware('auth');
-  Route.delete('user/id', 'UserController.delete').middleware('auth');
+  //Route.delete('user/:id', 'UserController.destroy').middleware('auth');
 
 
 
 
   //For all payement route
-  Route.get('payement', "PayementController.index");
+  Route.get('payements', "PayementController.index");
   Route.post('payement', "PayementController.store");
+  Route.post('payement/:id', "PayementController.show");
+  Route.put('payement/:id', "PayementController.update");
+  Route.delete('payement/:id', "PayementController.delete");
+
+
+  //For all service route
+  Route.get('services', "PayementController.index");
+  Route.post('service', "PayementController.store");
+  Route.post('service/:id', "PayementController.show");
+  Route.put('service/:id', "PayementController.update");
+  Route.delete('service/:id', "PayementController.delete");
+
+
+  //For statistics route
+  Route.get('stats', "PayementController.index");
+
+
 }).prefix('api');

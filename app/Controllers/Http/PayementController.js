@@ -27,18 +27,6 @@ class PayementController {
   }
 
   /**
-   * Render a form to be used for creating a new payement.
-   * GET payements/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
-  }
-
-  /**
    * Create/save a new payement.
    * POST payements
    *
@@ -66,17 +54,6 @@ class PayementController {
   async show ({ params, request, response, view }) {
   }
 
-  /**
-   * Render a form to update an existing payement.
-   * GET payements/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
 
   /**
    * Update payement details.
