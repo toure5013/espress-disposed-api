@@ -74,13 +74,20 @@ class UserController {
         message : "Data invalid",
       });
     }
-    var { firstname, lastname,phone, username, email, password, isactive, longitude, latitude} = request.post();
-    const status = 10000;
-    longitude == null ? longitude = 0 : longitude = longitude;
-    latitude == null ? latitude = 0 : latitude = latitude;
-    isactive == null ? isactive = 0 : isactive = isactive;
 
     try {
+      var { firstname, lastname,phone, username, email, password, isactive, longitude, latitude} = request.post();
+      const status = 10000;
+      longitude == null ? longitude = 0 : longitude = longitude;
+      latitude == null ? latitude = 0 : latitude = latitude;
+      isactive == null ? isactive = 0 : isactive = isactive;
+      var regexNumber = /((\+)[1-9]{2})[1-9](\d{2}){4}/;
+      if(phone == null || !phone.match(regexNumber)){
+        response.status(401).json({
+          error : true,
+          message : "The phone number is invalid!",
+        });
+      }
       const user = await User.create({user_id : userlength, firstname: firstname, lastname:lastname, phone: phone, username : username, email: email , password: password, isactive: isactive, status: status, longitude: longitude, latitude: latitude});
       Logger.info('Saved one user' + new Date());
       //Create user Wallet here

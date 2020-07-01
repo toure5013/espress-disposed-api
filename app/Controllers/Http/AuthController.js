@@ -3,7 +3,7 @@
 //../app/Controllers/Http/AuthController.js
 
 const User = use('App/Models/User');
-
+const Logger = use('Logger');
 class AuthController {
   /*
       async register({request, auth, response}) {
@@ -25,6 +25,8 @@ class AuthController {
   }) {
 
     // console.log(request.post())
+    //to login user send phone number and password, get user, with phone number and create a login with email
+
     let {
       email,
       password
@@ -52,6 +54,67 @@ class AuthController {
     }
   };
 
+  async loginphone({
+    request,
+    auth,
+    response
+  }) {
+
+    // console.log(request.post())
+    //to login user send phone number and password, get user, with phone number and create a login with email
+
+    let {
+      phone,
+      password
+    } = request.all();
+
+    try {
+      let regex = new RegExp(/^((\+)[1-9]{2})[1-9](\d{2}){4}$/);
+      let isPhoneNumber = regex.test(phone);
+      console.log(!isPhoneNumber);
+
+      if(!isPhoneNumber){
+        response.status(401).json({
+          error : true,
+          message : "The phone number is invalid!",
+        });
+      }
+
+      Logger.info('Log user with phone : ' + phone + '  -------- ' + new Date());
+      //Get user information using his phone
+      let user = await User.findBy('phone', phone);
+      if(user == null){
+        return response.status(403).json({
+          error: true,
+          message: 'You are not registered!'
+        })
+      }
+
+      console.log(user.email);
+
+      //extract user email
+      let email = user.email;
+
+      //verify if, user credentiel is correct and log him
+      if (await auth.attempt(email, password)) {
+        let token = await auth.generate(user)
+        var result = {
+          error: false,
+          user: user,
+          token : token,
+          message: "Login with success!"
+        }
+        Object.assign(user, token)
+        return response.json(user)
+      }
+    } catch (e) {
+      console.log(e)
+      return response.json({
+        error: true,
+        message: 'You are not registered!'
+      })
+    }
+  };
 
   async logout({
     request,

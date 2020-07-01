@@ -21,6 +21,7 @@ Route.group(() => {
 
   //Authentication
   Route.post('login', "AuthController.login");
+  Route.post('login/phone', "AuthController.loginphone");
   Route.get('logout', 'AuthController.logout').middleware('auth')
 
 
@@ -54,5 +55,8 @@ Route.group(() => {
   //For statistics route
   Route.get('stats', "PayementController.index");
 
+
+  //Other
+  // Route.on('/*', 'CoreController.index');
 
 }).prefix('api');

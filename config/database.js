@@ -94,9 +94,9 @@ module.exports = {
    connection: {
      host: Env.get('DB_HOST', 'localhost'),
      port: Env.get('DB_PORT', 27017),
-     username: Env.get('DB_USER', 'toure5013'),
-     password: Env.get('DB_PASSWORD', 'azerty'),
-     database: Env.get('DB_DATABASE', 'api-db'),
+     username: Env.get('DB_USER', 'root'),
+     password: Env.get('DB_PASSWORD', '$2y$10$lClSeaiHuhRvwrFN3.SQIeLLDBKg3jPs5oTh58ETrqNbvB6yyiX3C'),
+     database: Env.get('DB_DATABASE', 'srv-captain--api-db'),
      options: {
        // replicaSet: Env.get('DB_REPLICA_SET', '')
        // ssl: Env.get('DB_SSL, '')
