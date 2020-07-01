@@ -1,5 +1,5 @@
 {
-   "schemaVersion" :2 ,
+  "schemaVersion" :2 ,
  "templateId" : [
                         "FROM node:12.16.1",
                         "RUN mkdir -p /usr/src/app",
